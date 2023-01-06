@@ -1,43 +1,23 @@
-import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { addToCart, clearCart, decreaseProductQuantity, removeFromCart } from "../features/products/cartSlice";
 import { currencyFormatter } from "../utilities/currencyFormatter";
 
-const products = [
-  {
-    "id": 1,
-    "name": "Blink Mini – Compact indoor plug-in smart security camera",
-    "description": "Monitor the inside of your home day and night with our 1080P HD indoor plug-in smart security camera",
-    "price": 64.99,
-    "image": "https://res.cloudinary.com/dy28teazb/image/upload/v1668172648/React%20Shopping/Products/81-585-013-01_a04wkd.jpg",
-    "category": "Camera"
-  },
-  {
-    "id": 2,
-    "name": "Vlogging Camera, 4K Digital Camera for YouTube with WiFi",
-    "description": "It's super suitable for the 'happy snapper' who just hope to point and shoot to take good quality images",
-    "price": 109.99,
-    "image": "https://res.cloudinary.com/dy28teazb/image/upload/v1668172649/React%20Shopping/Products/81pgsjFGpmL_qundpd.jpg",
-    "category": "Camera"
-  },
-  {
-    "id": 3,
-    "name": "SAMSUNG 55-Inch Class Crystal 4K UHD AU8000 Series HDR",
-    "description": "Witness millions of shades of color through powerful Dynamic Crystal technology",
-    "price": 497.99,
-    "image": "https://res.cloudinary.com/dy28teazb/image/upload/v1668172649/React%20Shopping/Products/cl-uhd-tu7090-un50tu7090gxzs-rperspective-285965740_duusj5.png",
-    "category": "TV"
-  },
-];
-
 const Cart = () => {
-  const [count, setCount] = useState(1);
+  const { cartItems } = useSelector(state => state.cartItems);
+  console.log(cartItems);
+  const dispatch = useDispatch();
 
-  const handleIncreaseBtn = () => {
-    setCount((previousCount) => previousCount + 1);
+  const handleRemoveFromCart = (product) => {
+    dispatch(removeFromCart(product));
   }
 
-  const handleDecreaseBtn = () => {
-    setCount((previousCount) => previousCount - 1);
+  const handleIncreaseBtn = (product) => {
+    dispatch(addToCart(product))
+  }
+
+  const handleDecreaseBtn = (product) => {
+    dispatch(decreaseProductQuantity(product));
   }
 
   return (
@@ -51,7 +31,7 @@ const Cart = () => {
       </div>
       <div className="cart-item-container">
         {
-          products.map(product => {
+          cartItems.map(product => {
             return (<div key={product.id} className="cart-item grid grid-cols-5 gap-5 items-center py-5 border-b border-slate-300">
               <div className="col-span-2">
                 <div className="cart-info grid grid-cols-8 gap-5 h-24">
@@ -60,18 +40,20 @@ const Cart = () => {
                   </div>
                   <div className="cart-texts col-span-6 flex flex-col items-start gap-3">
                     <h4 className="product-title ">{product.name}</h4>
-                    <button className="remove-btn text-slate-500 hover:text-rose-600">Remove</button>
+                    <button
+                      onClick={() => handleRemoveFromCart(product)}
+                      className="remove-btn text-slate-500 hover:text-rose-600">Remove</button>
                   </div>
                 </div>
               </div>
               <h2>{currencyFormatter(product.price)}</h2>
               <div className="flex gap-6">
                 <span
-                  onClick={() => handleDecreaseBtn()}
+                  onClick={() => handleDecreaseBtn(product)}
                   className="w-6 h-6 border border-slate-500 rounded-sm flex justify-center items-center active:bg-slate-600 active:text-slate-50">-</span>
-                <span>{count}</span>
+                <span>{product.cartQuantity}</span>
                 <span
-                  onClick={() => handleIncreaseBtn()}
+                  onClick={() => handleIncreaseBtn(product)}
                   className="w-6 h-6 border border-slate-500 rounded-sm flex justify-center items-center active:bg-slate-600 active:text-slate-50">+</span>
               </div>
               <h2 className="total-price justify-self-end">{currencyFormatter(product.price)}</h2>
@@ -80,7 +62,9 @@ const Cart = () => {
         }
       </div>
       <div className="cart-lower-section flex justify-between items-start py-10">
-        <button className="clear-btn bg-rose-200 text-rose-500 uppercase tracking-wider hover:bg-rose-500 hover:text-rose-50 p-3 px-5 font-medium border border-rose-500 duration-300">Clear cart</button>
+        <button
+          onClick={() => dispatch(clearCart())}
+          className="clear-btn bg-rose-200 text-rose-500 uppercase tracking-wider hover:bg-rose-500 hover:text-rose-50 p-3 px-5 font-medium border border-rose-500 duration-300">Clear cart</button>
         <div className="flex flex-col gap-3">
           <div className="subtotal-section text-cyan-500 font-medium text-2xl flex justify-between">
             <h2>Subtotal</h2>

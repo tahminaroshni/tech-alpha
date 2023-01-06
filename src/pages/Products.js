@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import Product from "../components/Card";
+import Card from "../components/Card";
 
 const Products = () => {
   const { items: products, status } = useSelector(state => state.products);
@@ -12,7 +12,7 @@ const Products = () => {
           status && <p className="col-span-full text-center">{status}</p>
         }
         {
-          products.map(product => <Product product={product} key={product.id} />)
+          products.map(product => <Card product={product} key={product.id} />)
         }
       </div>
     </div>

@@ -1,29 +1,50 @@
 import { useState } from 'react';
 import { HiOutlineArrowRight } from 'react-icons/hi'
 import { HiOutlineArrowLeft } from 'react-icons/hi'
+import Slide from './Slide';
 
 const Slider = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const data = [
     {
       id: 1,
-      src: 'https://images.pexels.com/photos/1787236/pexels-photo-1787236.jpeg?auto=compress&cs=tinysrgb&w=600'
+      src: 'https://images.pexels.com/photos/1787236/pexels-photo-1787236.jpeg?auto=compress&cs=tinysrgb&w=600',
+      title: "Professional-Grade DSLR",
+      body: 'DSLRs are high-quality cameras with advanced controls and interchangeable lenses. They enable you to capture professional-level photos and videos.',
+      cta: 'Upgrade to DSLR',
+      category: 'camera'
     },
     {
       id: 2,
-      src: 'https://images.pexels.com/photos/6587838/pexels-photo-6587838.jpeg?auto=compress&cs=tinysrgb&w=600'
+      src: 'https://images.pexels.com/photos/6587838/pexels-photo-6587838.jpeg?auto=compress&cs=tinysrgb&w=600',
+      title: "Enhance Your TV Experience with a Smart TV",
+      body: "A smart TV is a television with internet connectivity and built-in apps for streaming online content. It offers convenient access to a wide range of shows, movies, and other online content.",
+      cta: "Upgrade to a Smart TV",
+      category: 'tv'
     },
     {
       id: 3,
-      src: ' https://images.pexels.com/photos/393047/pexels-photo-393047.jpeg?auto=compress&cs=tinysrgb&w=600'
+      src: 'https://images.pexels.com/photos/3945657/pexels-photo-3945657.jpeg?auto=compress&cs=tinysrgb&w=600',
+      title: "Step Up Your Gaming with a Console",
+      body: "A gaming console is the ultimate device for gamers. With a powerful processor, stunning graphics, and a wide selection of games, a console lets you fully immerse yourself in your favorite virtual worlds. Whether you're a casual gamer or a hardcore enthusiast, a console is a must-have for any serious gamer.",
+      cta: "Play on a Console Now",
+      category: 'console'
     },
     {
       id: 4,
-      src: 'https://images.pexels.com/photos/2050718/pexels-photo-2050718.jpeg?auto=compress&cs=tinysrgb&w=600'
+      src: ' https://images.pexels.com/photos/393047/pexels-photo-393047.jpeg?auto=compress&cs=tinysrgb&w=600',
+      title: 'Experience the Convenience of a Smartwatch',
+      body: ' Smartwatches are the perfect blend of style and functionality. With a smartwatch, you can easily stay connected to your phone, receive notifications, track your fitness, and much more all from your wrist. These devices are convenient, stylish, and make life easier.',
+      cta: 'Get a Smartwatch Today',
+      category: 'smart watch'
     },
     {
       id: 5,
-      src: 'https://images.pexels.com/photos/3945657/pexels-photo-3945657.jpeg?auto=compress&cs=tinysrgb&w=600'
+      src: 'https://images.pexels.com/photos/2050718/pexels-photo-2050718.jpeg?auto=compress&cs=tinysrgb&w=600',
+      title: "Explore the Skies with a Drone",
+      body: "Drones are devices that allow you to capture unique perspectives and breathtaking aerial footage. They are equipped with advanced technology and easy-to-use controls, making them accessible to people of all skill levels.",
+      cta: "Fly a Drone Today",
+      category: 'drone'
     },
   ];
 
@@ -39,21 +60,16 @@ const Slider = () => {
     <div className='frame relative'>
       <div className="slider">
         {
-          data.map(image => {
-            return <div
-              key={image.id}
-              style={{ backgroundImage: `url(${image.src})`, transform: `translateX(-${100 * currentSlide}vw` }}
-              className="slide"></div>
-          })
+          data.map(image => <Slide key={image.id} image={image} currentSlide={currentSlide} />)
         }
       </div>
       <div className='slider-btn absolute left-1/2 bottom-20 flex gap-20'>
         <button
           onClick={prevSlide}
-          className="left bg-transparent/40 rounded-sm text-slate-50 w-10 h-8 flex justify-center items-center text-xl hover:bg-transparent/80 hover:text-slate-300"><HiOutlineArrowLeft /></button>
+          className="left bg-transparent/40 rounded-sm text-slate-50 w-10 h-8 flex justify-center items-center text-xl hover:bg-transparent/80 hover:text-slate-300 border border-slate-400"><HiOutlineArrowLeft /></button>
         <button
           onClick={nextSlide}
-          className="right bg-transparent/40 rounded-sm text-slate-50 w-10 h-8 flex justify-center items-center text-xl hover:bg-transparent/80 hover:text-slate-300"><HiOutlineArrowRight /></button>
+          className="right bg-transparent/40 rounded-sm text-slate-50 w-10 h-8 flex justify-center items-center text-xl hover:bg-transparent/80 hover:text-slate-300 border border-slate-400"><HiOutlineArrowRight /></button>
       </div>
     </div>
   );

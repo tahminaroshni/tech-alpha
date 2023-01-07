@@ -66,10 +66,12 @@ const Slider = () => {
       <div className='slider-btn absolute left-1/2 bottom-20 flex gap-20'>
         <button
           onClick={prevSlide}
-          className="left bg-transparent/40 rounded-sm text-slate-50 w-10 h-8 flex justify-center items-center text-xl hover:bg-transparent/80 hover:text-slate-300 border border-slate-400"><HiOutlineArrowLeft /></button>
+          className="left bg-transparent/40 rounded-sm text-slate-50 w-10 h-8 flex justify-center items-center text-xl hover:bg-transparent/80 hover:text-slate-300 border border-slate-400"><HiOutlineArrowLeft />
+        </button>
         <button
           onClick={nextSlide}
-          className="right bg-transparent/40 rounded-sm text-slate-50 w-10 h-8 flex justify-center items-center text-xl hover:bg-transparent/80 hover:text-slate-300 border border-slate-400"><HiOutlineArrowRight /></button>
+          className="right bg-transparent/40 rounded-sm text-slate-50 w-10 h-8 flex justify-center items-center text-xl hover:bg-transparent/80 hover:text-slate-300 border border-slate-400"><HiOutlineArrowRight />
+        </button>
       </div>
     </div>
   );

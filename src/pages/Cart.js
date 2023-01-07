@@ -7,21 +7,24 @@ import { currencyFormatter } from "../utilities/currencyFormatter";
 
 const Cart = () => {
   const { cartItems, cartTotalAmount } = useSelector(state => state.cartItems);
-  console.log(cartItems);
   const dispatch = useDispatch();
 
+  // handle removing product from cart
   const handleRemoveFromCart = (product) => {
     dispatch(removeFromCart(product));
   }
 
+  // handle product quantity increase button
   const handleIncreaseBtn = (product) => {
     dispatch(addToCart(product))
   }
 
+  //  // handle product quantity decrease button
   const handleDecreaseBtn = (product) => {
     dispatch(decreaseProductQuantity(product));
   }
 
+  // update subtotal price
   useEffect(() => {
     dispatch(getSubTotalPrice());
   }, [cartItems, dispatch])
@@ -47,6 +50,8 @@ const Cart = () => {
               <h3>Quantity</h3>
               <h3 className="justify-self-end">Total</h3>
             </div>
+
+            {/* Cart container */}
             <div className="cart-item-container">
               {
                 cartItems.map(product => {
@@ -65,6 +70,7 @@ const Cart = () => {
                       </div>
                     </div>
                     <h2>{currencyFormatter(product.price)}</h2>
+
                     <div className="flex gap-6">
                       <span
                         onClick={() => handleDecreaseBtn(product)}
@@ -74,28 +80,41 @@ const Cart = () => {
                         onClick={() => handleIncreaseBtn(product)}
                         className="w-6 h-6 border border-slate-500 rounded-sm flex justify-center items-center active:bg-slate-600 active:text-slate-50">+</span>
                     </div>
-                    <h2 className="total-price justify-self-end">{currencyFormatter(product.price * product.cartQuantity)}</h2>
+
+                    <h2
+                      className="total-price justify-self-end">{currencyFormatter(product.price * product.cartQuantity)}
+                    </h2>
                   </div>)
                 })
               }
             </div>
+
+            {/* Cart lower part */}
             <div className="cart-lower-section flex justify-between items-start py-10">
               <button
                 onClick={() => dispatch(clearCart())}
-                className="clear-btn bg-rose-200 text-rose-500 uppercase tracking-wider hover:bg-rose-500 hover:text-rose-50 p-3 px-5 font-medium border border-rose-500 duration-300">Clear cart</button>
+                className="clear-btn bg-rose-200 text-rose-500 uppercase tracking-wider hover:bg-rose-500 hover:text-rose-50 p-3 px-5 font-medium border border-rose-500 duration-300">Clear cart
+              </button>
               <div className="flex flex-col gap-3">
                 <div className="subtotal-section text-cyan-500 font-medium text-2xl flex justify-between">
                   <h2>Subtotal</h2>
                   <h2>{cartTotalAmount.toFixed(2)}</h2>
                 </div>
-                <p className="text-slate-400">Taxes and shipping costs are calculated at the checkout</p>
-                <button className="checkout-btn uppercase tracking-widest font-medium bg-cyan-500 text-cyan-50 hover:bg-slate-700 hover:tetxt-slate-50 duration-300 p-3">Checkout</button>
-                <Link to='/products' className="continue text-lg text-cyan-500">Continue Shopping</Link>
+                <p
+                  className="text-slate-400">Taxes and shipping costs are calculated at the checkout
+                </p>
+                <button className="checkout-btn uppercase tracking-widest font-medium bg-cyan-500 text-cyan-50 hover:bg-slate-700 hover:tetxt-slate-50 duration-300 p-3">Checkout
+                </button>
+                <Link
+                  to='/products'
+                  className="continue text-lg text-cyan-500">Continue Shopping</Link>
               </div>
             </div>
           </>
           :
-          <Link className="text-center block text-cyan-500 hover:text-slate-500 duration-300" to='/products'>
+          <Link
+            className="text-center block text-cyan-500 hover:text-slate-500 duration-300"
+            to='/products'>
             <span className="cart-icon text-xl inline-block mr-3"><BsCart /></span>
             Start Shopping Now
           </Link>

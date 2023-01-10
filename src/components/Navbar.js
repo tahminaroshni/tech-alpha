@@ -13,14 +13,14 @@ const Navbar = () => {
         <div className="left">
           <Link
             to='/'
-            className="logo text-2xl text-slate-900 hover:text-cyan-400 duration-300 font-semibold italic">tech
+            className="logo md:text-xl xl:text-2xl text-slate-900 hover:text-cyan-400 duration-300 font-semibold italic">tech
             <span className="text-cyan-400 hover:text-slate-900">Alpha</span>
           </Link>
         </div>
 
         {/* Navbar right part */}
         <div
-          className="right flex gap-10 items-center text-lg">
+          className="right flex gap-10 items-center md:text-md xl:text-lg lg:text-xl">
           <Link
             to='/'
             className="nav-link text-slate-300 hover:text-slate-100  duration-300">Home
@@ -31,10 +31,10 @@ const Navbar = () => {
           <Link
             to='/cart' >
             <span
-              className="cart-icon relative text-2xl text-slate-300 hover:text-slate-50 duration-300"><BsCart />
+              className="cart-icon relative md:text-xl xl:text-2xl lg:text-3xl text-slate-300 hover:text-slate-50 duration-300"><BsCart />
             </span>
             <span
-              className="cart-count absolute text-sm h-6 w-6 flex justify-center items-center rounded-full bg-rose-500 text-rose-50  top-4 right-24 font-semibold">{cartItems.length}
+              className="cart-count absolute md:text-sm xl:text-md h-7 w-7 flex justify-center items-center rounded-full bg-rose-500 text-rose-50  top-3 sm:right-4 lg:right-6  2xl:right-40 font-semibold">{cartItems.length}
             </span>
           </Link>
         </div>

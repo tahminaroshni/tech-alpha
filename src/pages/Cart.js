@@ -30,8 +30,8 @@ const Cart = () => {
   }, [cartItems, dispatch])
 
   return (
-    <div className="cart-section container mx-auto py-10">
-      <h2 className="section-title space-font text-center mb-10 text-2xl font-bold tracking-wider  uppercase">
+    <div className="cart-section container mx-auto md:px-10 py-10">
+      <h2 className="section-title space-font text-center mb-10 text-2xl 2xl:text-4xl font-bold tracking-wider  uppercase">
         {
           cartItems.length
             ?
@@ -113,9 +113,9 @@ const Cart = () => {
           </>
           :
           <Link
-            className="text-center block text-cyan-500 hover:text-slate-500 duration-300"
+            className="text-center  2xl:text-2xl block text-cyan-500 hover:text-slate-500 duration-300"
             to='/products'>
-            <span className="cart-icon text-xl inline-block mr-3"><BsCart /></span>
+            <span className="cart-icon text-xl 2xl:text-2xl inline-block mr-3"><BsCart /></span>
             Start Shopping Now
           </Link>
       }

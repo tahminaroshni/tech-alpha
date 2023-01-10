@@ -16,7 +16,7 @@ const Card = ({ product }) => {
   }
 
   return (
-    <div className="product bg-white w-80 shadow-lg shadow-slate-300 rounded-md hover:shadow-2xl hover:shadow-slate-500 duration-300">
+    <div className="product justify-self-center bg-white w-80 shadow-lg shadow-slate-300 rounded-md hover:shadow-2xl hover:shadow-slate-500 duration-300">
       <div className="image overflow-hidden">
         <img src={product.image} alt={product.name} />
       </div>
